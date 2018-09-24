@@ -1,15 +1,50 @@
-// Parses our HTML and helps us find elements
-var cheerio = require("cheerio");
-// Makes HTTP request for HTML page
-var request = require("request");
+//initialize Express app
+var express = require('express');
+var mongoose = require("mongoose");
+var expressHandlebars = require("express-handlebars");
+var bodyParser = require("body-parser");
+var app = express();
+// Set up express Router
+var router = express.Router();
+
+//require our routes file pass our router object
+require("./config/route")(router);
+
+//Designate our public folder as a statis directory
+app.use(express.static(__dirname + "/public"));
+
+//Connect handlebars to our express app
+app.engine("handlebars", expressHandlebars({
+    defaultLayout: "main"
+}))
+app.set("view engine", "handlebars");
+
+//Use bodyParser in our app
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
+
+//Have every request go through our router middelware 
+app.use(router);
+
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines"; { useNewUrlParser: true } 
+
+mongoose.connect(MONGODB_URI, function(error){
+    if (error) {
+        console.log(error);
+    }
+    else {
+        console.log("mongoose connection successful");
+    }
+});
 
 
-// Making a request for reddit's "webdev" board. The page's HTML is passed as the callback's third argument
-request("https://old.reddit.com/r/webdev/", function(error, response, html) {
 
-// Load the HTML into cheerio and save it to a variable
-  // '$' becomes a shorthand for cheerio's selector commands, much like jQuery's '$'
-  var $ = cheerio.load(html);
+//Set up port 
+var port = process.env.PORT || 3000;
 
-    // An empty array to save the data that we'll scrape
-    var results = [];
+//Listen on the port 
+app.listen(port, function(){
+  console.log('Listening on PORT ' + port);
+});
