@@ -2,6 +2,8 @@
 
 //Bring headlines and notes from the controller
 var scrape = require("../scripts/scrape");
+
+var headlinesController = require("../controllers/headlines");
 var notesController = require("../controllers/notes");
 
 module.exports = function(router) {
@@ -14,7 +16,7 @@ module.exports = function(router) {
         res.render("saved");
     });
 
-    router.get("api/fetch", function(req, res){
+    router.get("/api/fetch", function(req, res){
         headlinesController.fetch(function(err, doc) {
             if (!docs || docs.insertedCount === 0) {
                 res.json({
@@ -52,7 +54,7 @@ module.exports = function(router) {
             res.json(data);
         });
     });
-    router.get("/api/noyes/:headline_id?", function(req, res) {
+    router.get("/api/notes/:headline_id?", function(req, res) {
         var query = {};
         if (req.params.headline_id) {
             query._id = req.params.headline_id;

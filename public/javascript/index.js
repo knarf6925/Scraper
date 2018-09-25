@@ -60,7 +60,7 @@ function handleArticleSave () {
     articleToSave.saved = true;
     //Using a patch method to be semantic since this is an update to an exsisting record in our collection
     ajax({
-        method: "patch",
+        method: "PATCH",
         url:"/api/headlines",
         data: articleToSave
     }) 
