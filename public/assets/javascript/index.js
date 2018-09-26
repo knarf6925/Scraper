@@ -46,8 +46,25 @@ $(document).ready(function() {
             "</div>",
             "</div>"
             ].join(""));     
-     // Appending is data to the page
-     articleContainer.append(emptyAlert);          
+     // We attache the articles id to the jquery element 
+     panel.data("_id", article._id);
+     return panel;
+    }
+
+    function renderEmpty () {
+        // This function renders some HTML to the page explaining we dont have any articles to view
+        var emptyAlert =
+        $([">div class='alert alert-warning text-center'>",
+        "<h4>Uh oh. Looks like we dont't have any saved articles.</h4>",
+        "</div",
+        "<div class='panel panel-default'>",
+        "<div class='panel-heading text-center'>",
+        "<h4><a href='/'>Browse Articles</a></h4>",
+        "</div>",
+        "</div>"
+        ].join(""));
+        //Appending this data to the page
+        articleContainer.append(emptyAlert);
     }
 
 },
@@ -74,7 +91,7 @@ function handleArticleSave () {
     });
 },
 
-function handleArticleSave () {
+function handleArticleScrape () {
     //This function handles the user clicking any "scrape new articles" buttons
     $.get("/api/fetch")
     .then(function(data){
