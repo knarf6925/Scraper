@@ -3,7 +3,7 @@ var makeDate = require("../scripts/date");
 
 var Headline = require ("../models/Headline");
 
-module.exports = {
+module.exports = {  
     fetch: function(cb){
         scrape(function(data){
             var articles = data;
@@ -16,7 +16,7 @@ module.exports = {
             });
         });
     },
-    delete: function(query, cd) {
+    delete: function(query, cb) {
         Headline.remove(query, cb);
     },
     get: function(query, cb) {
@@ -25,7 +25,7 @@ module.exports = {
             _id: -1
         })
         .exec(function(query, cb) {
-            cb(doc);
+            cb(docs)
         });
     },
     update: function(query, cb) {

@@ -54,7 +54,7 @@ $(document).ready(function() {
         return panel;
     }
 
-},
+})
 
 function renderEmpty () {
     // This function renders some HTML to the page explaining we dont have any articles to view
@@ -70,7 +70,7 @@ function renderEmpty () {
     ].join(""));
     //Appending this data to the page
     articleContainer.append(emptyAlert);
-},
+}
  
 function renderNotesList(data) {
 // This function handles rendering note list items to our notes modal
@@ -104,7 +104,7 @@ else {
 
 // Now append the noteToRender to the-container inside the note modal 
 $(".note-container").append(notesToRender);
-},
+}
 
 
 function handleArticleDelete () {
@@ -114,13 +114,13 @@ function handleArticleDelete () {
     // Using a delete method here
     $.ajax({
         method: "DELETE",
-        url: "/api/headlines/" + articleToDelete._id
+        url: "/api/headline/" + articleToDelete._id
     }).then(function(data) {
         if (data.ok) {
             initPage();
         }
     });
-},
+}
    function handleArticleNotes() {
        // This function handles opening the notes modal and displaying our notes
        // We grab the id of the article to get notes from the panel element the delete button its inside
@@ -155,7 +155,7 @@ function handleArticleDelete () {
         // renderNoyesList will populate the actual note HTML inside of themodal we just created/opened
         renderNotesList(noteData);
     });
-   },
+   }
    function handleNoteSave() {
     // This function handles what happens when a user tries to save a new note for an article
     // Setting a variable to hold some formatted data about our note ,
@@ -174,7 +174,7 @@ function handleArticleDelete () {
             bootbox.hideAll();
         });
     }
-   },
+   }
 
    function handleNoteDelete() {
     //This function handles the deletion of notes 
@@ -187,4 +187,4 @@ function handleArticleDelete () {
         // When done hide the modal 
         bootbox.hideAll();
     });
-   });
+   }

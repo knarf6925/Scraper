@@ -51,6 +51,7 @@ $(document).ready(function() {
      return panel;
     }
 
+
     function renderEmpty () {
         // This function renders some HTML to the page explaining we dont have any articles to view
         var emptyAlert =
@@ -67,7 +68,7 @@ $(document).ready(function() {
         articleContainer.append(emptyAlert);
     }
 
-},
+})
 
 function handleArticleSave () {
     // This function is triggered when the user wants to save an article
@@ -89,7 +90,7 @@ function handleArticleSave () {
             initPage();
         }
     });
-},
+}
 
 function handleArticleScrape () {
     //This function handles the user clicking any "scrape new articles" buttons
@@ -102,6 +103,5 @@ function handleArticleScrape () {
         bootbox.alert("<h3 class='text-center m-top-80>" + data.message + "<h3>");
 
     });
-})
-
+}
 
