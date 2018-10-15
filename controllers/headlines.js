@@ -5,7 +5,7 @@ var Headline = require ("../models/Headline");
 
 module.exports = {  
     fetch: function(cb){
-        scrape(function(data){
+        scrape(function(data) {
             var articles = data;
             for (var i = 0; i < articles.length; i++) {
                 articles[i].date = makeDate();
@@ -25,7 +25,7 @@ module.exports = {
             _id: -1
         })
         .exec(function(query, cb) {
-            cb(docs)
+            cb(doc);
         });
     },
     update: function(query, cb) {
